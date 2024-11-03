@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  roboliga2024_builder:
+    build:
+      context: image_builder
+      dockerfile: Dockerfile
+    image: roboliga2024:latest
+    container_name: roboliga2024_builder
+    

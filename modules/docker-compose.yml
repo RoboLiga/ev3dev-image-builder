@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  roboliga2024_modules:
+    build:
+      context: module_builder
+      dockerfile: Dockerfile
+    image: roboliga2024_module:latest
+    container_name: roboliga2024_module_builder
+    volumes:
+      - ../precompiled_modules:/wheels:rw
+    

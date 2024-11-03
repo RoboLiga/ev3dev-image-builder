@@ -1,0 +1,31 @@
+FROM --platform=linux/arm/v5 growflavor/ev3images:ev3dev10imgv02b
+
+SHELL ["/bin/bash", "-c"]
+
+RUN apt update
+RUN apt upgrade -y
+RUN mkdir /home/robot/modules
+
+WORKDIR /home/robot/
+
+RUN rm -rf ./*
+RUN rm -rf ./.cache
+
+COPY temp_modules /home/robot/modules
+
+USER robot
+
+RUN python3.11 -m venv roboliga
+RUN source /home/robot/roboliga/bin/activate
+RUN /home/robot/roboliga/bin/pip3.11 install /home/robot/modules/*.whl
+
+USER root
+
+RUN rm -rf ./modules
+
+RUN echo "source /home/robot/roboliga/bin/activate" >> /home/robot/.bashrc
+
+USER robot
+
+# Za ročne spremembe
+# CMD ["sleep", "infinity"]

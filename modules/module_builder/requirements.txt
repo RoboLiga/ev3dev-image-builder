@@ -1,0 +1,4 @@
+pycurl
+ujson
+python_ev3dev
+python_ev3dev2
